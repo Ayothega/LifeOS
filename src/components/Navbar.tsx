@@ -85,7 +85,7 @@ export default function Navbar() {
 
           <div className="bg-accent p-4 rounded-lg text-center">
             <p className="text-sm text-gray-300">
-              "The only way to do great work is to love what you do."
+              &ldquo;The only way to do great work is to love what you do.&rdquo;
             </p>
             <p className="text-xs text-gray-500 mt-2">- Steve Jobs</p>
           </div>

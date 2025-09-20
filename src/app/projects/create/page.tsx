@@ -1,10 +1,18 @@
 "use client"
-import { useState, useEffect } from "react"
+import { useState, useEffect, useCallback } from "react"
 import { useRouter } from "next/navigation"
 import { createClient } from "@/utils/supabase/client"
 import toast from "react-hot-toast"
 import Link from "next/link"
 import { PlusCircle } from "lucide-react"
+
+interface Project {
+  id: string
+  title: string
+  description: string
+  status: string
+  created_at: string
+}
 
 export default function ProjectsPage() {
   const supabase = createClient()
@@ -12,14 +20,10 @@ export default function ProjectsPage() {
 
   const [title, setTitle] = useState("")
   const [description, setDescription] = useState("")
-  const [projects, setProjects] = useState<any[]>([])
+  const [projects, setProjects] = useState<Project[]>([])
   const [loading, setLoading] = useState(true)
 
-  useEffect(() => {
-    fetchProjects()
-  }, [])
-
-  const fetchProjects = async () => {
+  const fetchProjects = useCallback(async () => {
     setLoading(true)
     const { data, error } = await supabase.from("projects").select("*").order("created_at", { ascending: false })
     if (error) {
@@ -29,7 +33,11 @@ export default function ProjectsPage() {
       setProjects(data || [])
     }
     setLoading(false)
-  }
+  }, [supabase])
+
+  useEffect(() => {
+    fetchProjects()
+  }, [fetchProjects])
 
   const handleCreateProject = async () => {
     if (!title.trim()) {
