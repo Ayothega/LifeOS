@@ -1,9 +1,19 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+      :root {
+        --primary-color: #1173d4;
+        --secondary-color: #1a202c;
+        --accent-color: #2d3748;
+        --text-primary: #e2e8f0;
+        --text-secondary: #a0aec0;
+      }
+      .material-symbols-outlined {
+        font-variation-settings:
+        'FILL' 1,
+        'wght' 400,
+        'GRAD' 0,
+        'opsz' 24
+      }
 
 @theme inline {
   --color-background: var(--background);
